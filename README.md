@@ -1,36 +1,49 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Patas Felizes — Landing Page (Pet Shop)
 
-## Getting Started
+Landing page moderna e responsiva para pet shop/clínica veterinária, construída como peça de portfólio para trabalhos freelance. Stack: **Next.js 16 (App Router) + TypeScript + Tailwind CSS v4**, sem backend — 100% estática, pronta para hospedagem gratuita.
 
-First, run the development server:
+## Rodando localmente
 
 ```bash
+npm install
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Abra [http://localhost:3000](http://localhost:3000).
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Personalizando para um cliente real
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+Quase toda a identidade do site (nome, telefone, WhatsApp, endereço, horários, redes sociais e estatísticas de destaque) vive em um único arquivo:
 
-## Learn More
+```
+src/lib/site-config.ts
+```
 
-To learn more about Next.js, take a look at the following resources:
+Edite esse arquivo para reaproveitar o template em outros clientes sem mexer nos componentes. Cores da marca ficam em `src/app/globals.css` (bloco `:root`), e a tipografia (Poppins + Inter) é configurada em `src/app/layout.tsx`.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+Antes de publicar para um cliente real:
+- Troque o número de WhatsApp e telefone em `site-config.ts`.
+- Substitua o bloco "mapa ilustrativo" em `src/components/ContactLocation.tsx` por um embed real do Google Maps com o endereço definitivo.
+- Ajuste textos de serviços/depoimentos/FAQ para o negócio real.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## Deploy no Vercel (grátis)
 
-## Deploy on Vercel
+O projeto não precisa de nenhuma configuração extra — é um app Next.js padrão.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+**Opção 1 — via GitHub (recomendado, com deploy automático a cada push):**
+1. Crie um repositório no GitHub e suba este projeto (`git push`).
+2. Acesse [vercel.com/new](https://vercel.com/new), importe o repositório.
+3. Vercel detecta o Next.js automaticamente — clique em "Deploy". Pronto.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+**Opção 2 — via CLI, direto desta pasta:**
+```bash
+npx vercel login   # autentica sua conta (abre o navegador)
+npx vercel --prod  # publica em produção
+```
+
+Qualquer uma das opções fica no plano gratuito (Hobby) do Vercel, suficiente para este site.
+
+## Qualidade
+
+- `npm run lint` — ESLint (Next.js core-web-vitals + TypeScript).
+- `npm run build` — build de produção; falha se houver erro de tipos.
